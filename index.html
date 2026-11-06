@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ed6c11" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Moffat Beach Brewing Co.</title>
+  <style>
+    :root { --orange:#f27b18; --gold:#f7b23b; --ink:#1b211b; --cream:#fff1d8; }
+    * {box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--ink);color:var(--cream);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} button,a{-webkit-tap-highlight-color:transparent}
+    .app{max-width:650px;margin:auto;min-height:100svh;background:var(--ink)}
+    .hero{position:relative;min-height:365px;padding:calc(env(safe-area-inset-top) + 26px) 24px 26px;text-align:center;background:linear-gradient(180deg,#ec6714 0%,#ff9816 48%,#ffd446 79%,#171f18 80%,#171f18 100%);overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:45% 0 19%;background:radial-gradient(ellipse at 50% 88%,#fff9a3 0%,transparent 43%);opacity:.65}
+    .logo{position:relative;display:block;width:min(58vw,220px);height:min(58vw,220px);object-fit:cover;border-radius:50%;margin:4px auto 12px;box-shadow:0 9px 30px #0003}
+    .hero h1{position:relative;margin:0;font-weight:900;font-size:clamp(20px,5vw,30px);letter-spacing:.02em;text-shadow:2px 3px #101910}
+    .hero p{position:relative;margin:11px 0 0;font-size:12px;font-weight:800;letter-spacing:.29em}
+    .menu-toggle{position:absolute;right:16px;top:calc(env(safe-area-inset-top) + 18px);background:#17231cb8;border:1px solid #fff7;color:white;border-radius:10px;padding:10px 13px;font-size:22px;cursor:pointer}
+    .menu{position:absolute;z-index:4;top:calc(env(safe-area-inset-top) + 65px);right:16px;background:#1b211b;border:1px solid var(--gold);border-radius:12px;padding:8px;box-shadow:0 12px 35px #0007;text-align:left;min-width:210px}
+    .menu[hidden]{display:none}.menu a{display:block;padding:12px;color:var(--cream);text-decoration:none;font-weight:700}.menu a:hover{background:#ffffff16}
+    .tiles{padding:20px 16px 50px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .tile{position:relative;display:flex;min-height:166px;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:20px 9px 25px;border:2px solid #eeb05a;border-radius:17px;overflow:hidden;text-decoration:none;color:white;background:linear-gradient(145deg,#473017a8,#121b16db),radial-gradient(circle at 75% 10%,#b16d2b,#2b2a1c 68%);box-shadow:0 5px 13px #0004;transition:transform .15s,filter .15s}
+    .tile:active{transform:scale(.97)}.tile:hover{filter:brightness(1.12)}.tile::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(30deg,transparent 0 14px,#ffffff05 15px 16px);pointer-events:none}
+    .tile.beers{background:linear-gradient(140deg,#e88d20d9,#482008df),radial-gradient(circle,#ffdd71,#522712)}
+    .tile.story{background:linear-gradient(140deg,#6c5136,#161e1c)}.tile.memberships,.tile.rewards{background:linear-gradient(140deg,#3c5325,#14231a)}.tile.venues{background:linear-gradient(140deg,#985327,#231d17)}.tile.tours{background:linear-gradient(140deg,#66665b,#1a2423)}.tile.loyalty{background:linear-gradient(115deg,#75411f,#241a13)}
+    .icon{position:relative;font-size:45px;line-height:1.1;filter:drop-shadow(0 2px 3px #0008)}.label{position:relative;font-size:clamp(13px,3.4vw,19px);font-weight:900;line-height:1.1;letter-spacing:.045em;text-transform:uppercase}.subtitle{position:relative;font-size:10px;font-weight:650;letter-spacing:.02em}.arrow{position:absolute;bottom:6px;left:calc(50% - 15px);width:30px;height:30px;display:grid;place-items:center;background:var(--orange);border-radius:50%;font-size:24px;line-height:1}
+    .tile.loyalty{grid-column:1/-1;min-height:125px;display:grid;grid-template-columns:80px 1fr;column-gap:12px;align-content:center;justify-items:start;text-align:left;padding:16px 42px 16px 20px}.loyalty .icon{grid-row:1/3;font-size:50px}.loyalty .arrow{left:auto;right:8px;top:calc(50% - 15px)}.loyalty .subtitle{font-size:clamp(10px,2.6vw,14px)}
+    footer{text-align:center;color:#e2b66d;padding:0 16px calc(env(safe-area-inset-bottom) + 25px);font-size:12px;letter-spacing:.09em}
+    .page{display:none;min-height:100svh;padding:calc(env(safe-area-inset-top) + 25px) 22px 40px;background:linear-gradient(155deg,#382b1b,#1b211b 60%)}.page.active{display:block}.app:has(.page.active) .home{display:none}.back{border:1px solid var(--gold);background:transparent;color:var(--cream);padding:12px 15px;border-radius:10px;font-weight:750;cursor:pointer}.page h2{font-size:clamp(27px,7vw,42px);margin:48px 0 15px}.page p{line-height:1.6;color:#e4d7c2}.notice{border:1px solid #f7b23b88;border-radius:16px;padding:22px;background:#ffffff0b;margin-top:28px}.notice strong{color:#ffbb5e}
+    @media(max-width:350px){.tiles{gap:9px;padding-inline:10px}.tile{min-height:150px}.icon{font-size:36px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tile{transition:none}}
+  </style>
+</head>
+<body><main class="app">
+  <div class="home">
+    <header class="hero">
+      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" id="menuButton">☰</button>
+      <nav class="menu" id="menu" hidden aria-label="Main navigation"></nav>
+      <img class="logo" src="assets/logo.jpeg" alt="Moffat Beach Brewing Co. logo" />
+      <h1>Moffat Beach Brewing Co.</h1><p>A TASTE OF THE GOOD LIFE</p>
+    </header>
+    <section class="tiles" aria-label="Explore Moffat Beach Brewing">
+      <a class="tile beers" href="#beers"><span class="icon" aria-hidden="true">🍻</span><span class="label">Moffat Beach<br>Beers</span><span class="arrow" aria-hidden="true">›</span></a>
+      <a class="tile story" href="#story"><span class="icon" aria-hidden="true">📖</span><span class="label">The Story</span><span class="arrow" aria-hidden="true">›</span></a>
+      <a class="tile memberships" href="#memberships"><span class="icon" aria-hidden="true">🎟️</span><span class="label">Memberships</span><span class="arrow" aria-hidden="true">›</span></a>
+      <a class="tile venues" href="#venues"><span class="icon" aria-hidden="true">🍴</span><span class="label">Venues</span><span class="subtitle">Menus &amp; bookings</span><span class="arrow" aria-hidden="true">›</span></a>
+      <a class="tile rewards" href="#rewards"><span class="icon" aria-hidden="true">🏆</span><span class="label">Rewards</span><span class="arrow" aria-hidden="true">›</span></a>
+      <a class="tile tours" href="#tours"><span class="icon" aria-hidden="true">🏭</span><span class="label">Brewery Tours</span><span class="subtitle">Brewhouse only</span><span class="arrow" aria-hidden="true">›</span></a>
+      <a class="tile loyalty" href="#loyalty"><span class="icon" aria-hidden="true">💳</span><span class="label">Loyalty Cards</span><span class="subtitle">Growlers • Schooners • Case Purchases</span><span class="arrow" aria-hidden="true">›</span></a>
+    </section>
+    <footer>MOFFAT BEACH BREWING CO. · SUNSHINE COAST</footer>
+  </div>
+  <section class="page" id="detail" aria-live="polite"><button class="back" id="back">← Back to home</button><h2 id="pageTitle"></h2><p id="pageDescription"></p><div class="notice"><strong>Coming next</strong><p id="pageNext"></p></div></section>
+</main>
+<script>
+const sections={
+ beers:['Moffat Beach Beers','Discover the brewery’s beers and find your next favourite.','Beer catalogue, tasting notes, availability and beer detail pages.'],
+ story:['The Story','Learn about the people and passion behind Moffat Beach Brewing Co.','Brand history, photos, milestones and the brewing team.'],
+ memberships:['Memberships','Join the Moffat Beach community.','Membership tiers, benefits and secure purchasing will be added in a later phase.'],
+ venues:['Venues','Explore venues, menus and booking options.','Venue listings, opening hours, food menus and table booking integration.'],
+ rewards:['Rewards','See what’s on offer for loyal customers.','Rewards catalogue, eligibility and redemption experience.'],
+ tours:['Brewery Tours','Go behind the scenes at the Brewhouse.','Brewhouse-only tour information, dates and booking integration.'],
+ loyalty:['Loyalty Cards','Keep track of your growler, schooner and case purchases.','Three digital loyalty cards with balances, purchase stamps and redemption rules.']
+};
+const nav=document.getElementById('menu');
+for(const [key,[title]] of Object.entries(sections)){const a=document.createElement('a');a.href='#'+key;a.textContent=title;nav.append(a)}
+const button=document.getElementById('menuButton');button.addEventListener('click',()=>{nav.hidden=!nav.hidden;button.setAttribute('aria-expanded',String(!nav.hidden))});
+function render(){const key=location.hash.slice(1),data=sections[key],detail=document.getElementById('detail');detail.classList.toggle('active',!!data);nav.hidden=true;button.setAttribute('aria-expanded','false');if(data){document.getElementById('pageTitle').textContent=data[0];document.getElementById('pageDescription').textContent=data[1];document.getElementById('pageNext').textContent=data[2]}window.scrollTo(0,0)}
+document.getElementById('back').addEventListener('click',()=>{location.hash=''});window.addEventListener('hashchange',render);render();
+</script></body></html>
